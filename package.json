@@ -1,23 +1,29 @@
 {
-  "name": "arkerstkaart",
-  "version": "1.0.0",
-  "description": "Augmented Reality Kerstkaart",
+  "name": "nextjs",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "deploy": "gh-pages -d dist",
-    "build": "rollup -c \"rollup_config.js\"",
-    "start": "serve",
-    "gh-deploy": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "gh-pages": "^6.0.0",
-    "three": "^0.157.0"
+    "@react-three/fiber": "^8.14.5",
+    "next": "13.5.4",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "14.0.1",
-    "rollup": "2.79.0",
-    "rollup-plugin-terser": "7.0.2",
-    "serve": "14.2.0"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/three": "^0.157.0",
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4",
+    "postcss": "^8",
+    "tailwindcss": "^3",
+    "typescript": "^5"
   }
 }
