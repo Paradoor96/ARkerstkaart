@@ -5,10 +5,10 @@ export default {
 	input: 'src/main.js',
 	output: [
 		{
-			format: 'umd',
-			name: 'MYAPP',
+			format: 'iife',
+			name: 'app',
 			file: 'dist/bundle.js'
 		}
 	],
-	plugins: [ resolve(), terser() ]
+	plugins: [ resolve(), terser() ],
 };
