@@ -1,0 +1,92 @@
+
+<script async src="https://unpkg.com/es-module-shims@1.7.3/dist/es-module-shims.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.147.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.147.0/examples/jsm/",
+    "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-three.prod.js"
+  }
+}
+</script>
+<script type="module">
+    import * as THREE from 'three';
+    import { MindARThree } from 'mindar-image-three';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const numSnowflakes = 50;
+
+      for (let i = 0; i < numSnowflakes; i++) {
+        createSnowflake();
+      }
+
+      function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        document.body.appendChild(snowflake);
+
+        const randomSize = Math.random() * 3 + 1;
+        const randomPosition = Math.random() * 100;
+        const randomAnimationDuration = Math.random() * 3 + 2;
+
+        snowflake.style.width = `${randomSize}px`;
+        snowflake.style.height = `${randomSize}px`;
+        snowflake.style.left = `${randomPosition}vw`;
+        snowflake.style.animationDuration = `${randomAnimationDuration}s`;
+
+        // Optionally, you can add additional styles or animations for more realism
+      }
+    });
+</script>
+
+<style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .snowflake {
+      z-index: 100;
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+      width: 5px;
+      height: 5px;
+      animation: snowfall linear infinite;
+    }
+
+    @keyframes snowfall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+</style>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.2.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <a-scene renderer="logarithmicDepthBuffer: true;" mindar-image="missTolerance: 1; warmupTolerance: 3; filterMinCF:0.01; filterBeta: 1; imageTargetSrc: assets/tracker/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <a-assets>
+        <img id="card" src="assets/Hiro_marker_ARjs.png" />
+        <a-asset-item id="model" src="assets/Kerstman_video_build6Exportv3.gltf"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: true"></a-camera>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane src="#card" position="0 0 0" width="1" rotation="0 0 0"></a-plane>
+        <a-entity id="model" rotation="90 0 0" scale="0.15 0.15 0.15">
+            <a-entity position="0 0 0" rotation="0 0 0"
+                      gltf-model="#model"
+                      animation-mixer
+                      shadow="cast: true; receive: false"></a-entity>
+          </a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
